@@ -1,4 +1,4 @@
-## PATHFINDER
+# PATHFINDER
 
 Policy‑Aware Transaction Harness for Runtime Governance
 
@@ -7,7 +7,7 @@ Policy‑Aware Transaction Harness for Runtime Governance
 ![SQLite](https://img.shields.io/badge/SQLite-003B57)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-# 📌 Overview
+## 📌 Overview
 
 PATHFINDER is a runtime governance middleware designed to enforce policies, generate auditable receipts, and detect tampering for intelligent decision engines (AI agents, autonomous systems, algorithmic traders). It intercepts every decision request, evaluates it against a set of rules (defined in YAML), and either allows or denies execution. Allowed decisions are cryptographically signed with RSA, providing verifiable proof of policy compliance.
 
@@ -31,7 +31,7 @@ Dynamic policy reload (no server restart)
 ✅ REST API – Built with FastAPI, interactive Swagger UI at /docs.
 🛠 Tech Stack
 
-# Component	Technology
+## Component	Technology
 Backend	Python 3.8+ with FastAPI
 ORM / Database	SQLAlchemy + SQLite (dev)
 Cryptography	cryptography (RSA‑2048, PSS padding)
@@ -63,7 +63,7 @@ Python 3.8 or higher
 pip (Python package manager)
 Installation
 
-# Clone the repository
+## Clone the repository
 
 bash
 git clone https://github.com/yourusername/pathfinder.git
@@ -95,7 +95,7 @@ Logging – Configured in logging_config.py.
 
 All endpoints return JSON.
 
-# Method	Endpoint	Description
+## Method	Endpoint	Description
 
 POST	/decide	Submit a decision; returns allow/deny + receipt
 GET	/receipt/{receipt_id}	Retrieve a specific receipt
@@ -166,7 +166,7 @@ policies:
                 between: ["09:00", "17:00"]
         effect: allow
         
-# 🔒 Security Considerations
+## 🔒 Security Considerations
 
 Private key – Stored in the file system. In production, use a secrets manager (e.g., HashiCorp Vault, AWS Secrets Manager).
 Database – SQLite is fine for demos; for production, use a secure PostgreSQL instance with TLS.
@@ -174,7 +174,7 @@ Key rotation – Rotating the RSA key will invalidate all existing receipts. Pla
 Access control – The API currently has no authentication; add OAuth2 / JWT as needed.
 🤝 Contributing
 
-# Contributions are welcome! Please follow these steps:
+## Contributions are welcome! Please follow these steps:
 
 Fork the repository.
 Create a new branch (git checkout -b feature/your-feature).
@@ -185,13 +185,13 @@ Open a Pull Request.
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-# 🙏 Acknowledgements
+## 🙏 Acknowledgements
 
 FastAPI – for the excellent web framework.
 cryptography – for secure cryptographic operations.
 SQLAlchemy – for the robust ORM.
 
-# 📞 Contact
+## 📞 Contact
 
 For questions or support, please open an issue on GitHub or reach out to warikakhilesh319@gmail.com
 
