@@ -2,10 +2,10 @@
 
 Policy‑Aware Transaction Harness for Runtime Governance
 
-https://img.shields.io/badge/python-3.8%252B-blue
-https://img.shields.io/badge/FastAPI-0.110.0-009688
-https://img.shields.io/badge/SQLite-003B57
-https://img.shields.io/badge/license-MIT-green
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688)
+![SQLite](https://img.shields.io/badge/SQLite-003B57)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 # 📌 Overview
 
