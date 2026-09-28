@@ -1,0 +1,17 @@
+policies:
+  - name: "default"
+    version: "1.0.0"
+    enabled: true
+    rules:
+      - condition:
+          action: "create"
+        effect: allow
+      - condition:
+          action: "update"
+        effect: allow
+      - condition:
+          action: "view"
+        effect: allow
+      - condition:
+          action: "delete"
+        effect: allow
