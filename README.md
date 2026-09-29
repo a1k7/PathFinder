@@ -57,7 +57,7 @@ This repository contains a fully functional **Reference Evaluation Kit (REK)** t
 
 ## 📁 Project Structure
 
-
+```text
 PathFinder/
 ├── pathfinder_backend/              # FastAPI backend
 │   ├── main.py                      # FastAPI app and endpoints
@@ -80,13 +80,11 @@ PathFinder/
 │   ├── app/
 │   │   ├── page.tsx                 # Dashboard
 │   │   └── layout.tsx
-│   │
 │   ├── components/
 │   │   ├── HitlApproval.tsx         # HITL decision gate
 │   │   ├── AuditReplay.tsx          # Audit trail and replay
 │   │   ├── FlowGraph.tsx            # React Flow topology
 │   │   └── AgentStream.tsx          # Autonomous agent simulator
-│   │
 │   ├── lib/
 │   │   └── api.ts                   # API helpers
 │   ├── package.json
@@ -95,8 +93,7 @@ PathFinder/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-
-
+```
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -139,7 +136,7 @@ Logging – Configured in logging_config.py.
 API Proxy – The frontend routes /api/proxy/* → http://127.0.0.1:8000/* via next.config.ts.
 📚 API Endpoints
 
-##Method	Endpoint	Description
+## Method	Endpoint	Description
 
 POST	/decide	Submit a decision; returns allow/deny + receipt
 GET	/receipt/{receipt_id}	Retrieve a specific receipt
@@ -166,7 +163,7 @@ curl -X POST http://localhost:8000/verify \
     "decision_id": "<decision_id>",
     "receipt": { ... }
   }'
-##📝 Policy Language
+## 📝 Policy Language
 
 Policies are defined in YAML under the policies key. Each policy has a name, version, enabled flag, and a list of rules. Each rule contains a condition and an effect (allow or deny).
 
@@ -213,7 +210,7 @@ pip install datasets
 python insurance_client.py
 Each insurance case is mapped to a governance decision and evaluated against the policies.
 
-##🔒 Security Considerations
+## 🔒 Security Considerations
 
 Private key – Stored on the file system. In production, use a secrets manager (HashiCorp Vault, AWS Secrets Manager).
 Database – SQLite is fine for demos; for production, use a secure PostgreSQL instance with TLS.
@@ -230,13 +227,11 @@ Open a Pull Request.
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-##🙏 Acknowledgements
+## 🙏 Acknowledgements
 
 FastAPI – web framework
 cryptography – secure cryptographic operations
 SQLAlchemy – ORM
 Next.js – React framework
 React Flow – graph visualization
-📞 Contact
 
-For questions or support, please open an issue on GitHub or reach out to warikakhilesh319@gmail.com.
