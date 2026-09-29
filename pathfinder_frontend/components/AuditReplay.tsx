@@ -26,8 +26,9 @@ export default function AuditReplay({ refreshSignal }: { refreshSignal: number }
 
   const getEffect = (log: any): string => {
     if (log.effect) return log.effect;
-    if (log.details?.allowed !== undefined) return log.details.allowed ? 'allow' : 'deny';
-    if (log.event_data?.allowed !== undefined) return log.event_data.allowed ? 'allow' : 'deny';
+    const details = log.details || {};
+    if (details.allowed !== undefined) return details.allowed ? 'allow' : 'deny';
+    if (details.replay_allowed !== undefined) return details.replay_allowed ? 'allow' : 'deny';
     return 'LOG';
   };
 
@@ -46,16 +47,15 @@ export default function AuditReplay({ refreshSignal }: { refreshSignal: number }
   };
 
   const handleTamperTest = async (decisionId: string) => {
-    if (!decisionId) {
-      alert('No valid decision ID associated with this event log.');
-      return;
-    }
     try {
-      await api.tamper(decisionId, 'amount', 999999);
-      alert('Simulated payload modification in DB! Try re-verifying this receipt to detect tampering.');
-      fetchLogs();
+      const tamperRes = await api.tamper(decisionId, 'decision_data.amount', 999999);
+      alert(
+        tamperRes.tamper_detected
+          ? '✅ Tamper detected by backend!'
+          : '❌ Tamper NOT detected — check backend fix.'
+      );
     } catch (err: any) {
-      alert(`Tamper request failed: ${err.message}`);
+      alert(`Tamper test failed: ${err.message}`);
     }
   };
 
@@ -88,21 +88,20 @@ export default function AuditReplay({ refreshSignal }: { refreshSignal: number }
               const effect = getEffect(log);
               return (
                 <tr key={log.id || `${dId}-${idx}`} className="hover:bg-slate-800/50">
-                  <td className="p-2.5 text-slate-400">
-                    {log.timestamp ? new Date(log.timestamp).toLocaleTimeString() : 'N/A'}
+                  <td className="px-4 py-3 font-mono text-sm text-slate-300">
+                    {new Date(log.timestamp.endsWith('Z') ? log.timestamp : log.timestamp + 'Z').toLocaleTimeString()}
                   </td>
                   <td className="p-2.5 font-mono text-slate-300">
                     {dId ? `${dId.slice(0, 8)}...` : 'N/A'}
                   </td>
                   <td className="p-2.5">{log.action || log.event_type || 'evaluate'}</td>
                   <td className="p-2.5">
-                    <span className={`px-2 py-0.5 rounded font-mono ${
-                      effect === 'allow' 
-                        ? 'bg-emerald-950 text-emerald-400' 
-                        : effect === 'deny' 
-                        ? 'bg-rose-950 text-rose-400' 
+                    <span className={`px-2 py-0.5 rounded font-mono ${effect === 'allow'
+                      ? 'bg-emerald-950 text-emerald-400'
+                      : effect === 'deny'
+                        ? 'bg-rose-950 text-rose-400'
                         : 'bg-slate-800 text-slate-300'
-                    }`}>
+                      }`}>
                       {effect.toUpperCase()}
                     </span>
                   </td>
