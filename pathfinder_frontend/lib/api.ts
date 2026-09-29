@@ -71,7 +71,7 @@ export const api = {
       const res = await fetch(`${BASE_URL}/tamper`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ decision_id, field, value }),
+        body: JSON.stringify({ decision_id, field, new_value:value }),
       });
       return await res.json();
     } catch (err) {
