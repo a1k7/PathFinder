@@ -42,11 +42,17 @@ export default function HitlApproval({ onDecisionMade }: { onDecisionMade: () =>
       <div className="grid grid-cols-3 gap-3">
         <div>
           <label className="text-xs text-slate-400">Actor/User</label>
-          <input
+          <select
             className="w-full bg-slate-800 border border-slate-700 px-3 py-1.5 rounded text-sm mt-1 focus:outline-sky-500"
             value={user}
             onChange={(e) => setUser(e.target.value)}
-          />
+          >
+            <option value="alice">alice</option>
+            <option value="bob">bob</option>
+            <option value="senior_adjuster">senior_adjuster</option>
+            <option value="claims_manager">claims_manager</option>
+            <option value="blocked_user">blocked_user</option>
+          </select>
         </div>
         <div>
           <label className="text-xs text-slate-400">Action</label>
@@ -58,6 +64,7 @@ export default function HitlApproval({ onDecisionMade }: { onDecisionMade: () =>
             <option value="create">create</option>
             <option value="update">update</option>
             <option value="delete">delete</option>
+            <option value="view">view</option>
           </select>
         </div>
         <div>

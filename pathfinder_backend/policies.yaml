@@ -1,17 +1,69 @@
 policies:
-  - name: "default"
-    version: "1.0.0"
+  - name: "insurance_governance"
+    version: "2.0.0"
     enabled: true
     rules:
+      # ==========================================
+      # Priority 1: Absolute denies (highest priority)
+      # ==========================================
+
+      # Block blocked users — nothing they do is allowed
       - condition:
-          action: "create"
-        effect: allow
+          user: "blocked_user"
+        effect: deny
+
+      # Block deletes from non-senior adjusters
       - condition:
-          action: "update"
-        effect: allow
+          and:
+            - action: "delete"
+            - user:
+                not_in: ["senior_adjuster", "claims_manager"]
+        effect: deny
+
+      # ==========================================
+      # Priority 2: Amount-based limits
+      # ==========================================
+
+      # Block high-value creates (> 50,000 needs human review)
       - condition:
-          action: "view"
+          and:
+            - action: "create"
+            - amount:
+                gt: 50000
+        effect: deny
+
+      # Block high-value updates (> 10,000 needs human review)
+      - condition:
+          and:
+            - action: "update"
+            - amount:
+                gt: 10000
+        effect: deny
+
+      # Block massive amounts for ANY action (safety net)
+      - condition:
+          amount:
+            gt: 1000000
+        effect: deny
+
+      # ==========================================
+      # Priority 3: Allow safe operations
+      # ==========================================
+
+      # Allow create/view/update under limits
+      - condition:
+          action:
+            in: ["create", "view", "update"]
         effect: allow
+
+      # Allow deletes (only reaches here if user passed Priority 1)
       - condition:
           action: "delete"
         effect: allow
+
+      # ==========================================
+      # Priority 4: Default deny (fails safely)
+      # ==========================================
+
+      - condition: {}
+        effect: deny
