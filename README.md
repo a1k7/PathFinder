@@ -57,7 +57,7 @@ This repository contains a fully functional **Reference Evaluation Kit (REK)** t
 
 ## 📁 Project Structure
 
-```text
+
 PathFinder/
 ├── pathfinder_backend/              # FastAPI backend
 │   ├── main.py                      # FastAPI app and endpoints
@@ -107,7 +107,6 @@ PathFinder/
 
 ### 1. Clone the repository
 
-```bash
 git clone https://github.com/a1k7/PathFinder.git
 cd PathFinder
 2. Start the Backend
